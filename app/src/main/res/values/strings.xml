@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Štediša</string>
+    <string name="splash_text_1">Vaš odgovor na vječno pitanje:</string>
+    <string name="splash_text_2">gdje mi je nestao novac?</string>
+    <string name="welcome">Dobrodošli!</string>
+    <string name="title_activity_credits">CreditsActivity</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="authors">Autori:</string>
+    <string name="names">Karmela Slišković\nJosip Tomić\nJasmin Vučelj\n</string>
+    <string name="course">Predmet:</string>
+    <string name="course_name">Interakcija čovjeka i \nračunala\n</string>
+    <string name="college">Fakultet:</string>
+    <string name="college_name">FER\n</string>
+</resources>
