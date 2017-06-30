@@ -11,4 +11,11 @@
     <string name="course_name">Interakcija čovjeka i \nračunala\n</string>
     <string name="college">Fakultet:</string>
     <string name="college_name">FER\n</string>
+    <string name="costs">Troškovi</string>
+    <string name="incomes">Prihodi</string>
+    <string name="currencies">Valute</string>
+    <string name="stats">Statistika</string>
+    <string name="categories">Kategorije</string>
+    <string name="settings">Postavke</string>
+    <string name="about">O aplikaciji</string>
 </resources>
