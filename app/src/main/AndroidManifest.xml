@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
-            android:label="@string/title_activity_splash">
+            android:label="@string/title_activity_splash"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,8 +21,14 @@
         </activity>
         <activity
             android:name=".CreditsActivity"
-            android:label="@string/title_activity_credits"></activity>
-        <activity android:name=".MainMenuActivity"></activity>
+            android:label="@string/title_activity_credits" />
+        <activity
+            android:name=".MainMenuActivity"
+            android:label="@string/title_activity_main_menu" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings">
+        </activity>
     </application>
 
 </manifest>

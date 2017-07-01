@@ -5,6 +5,8 @@
     <string name="welcome">Dobrodošli!</string>
     <string name="title_activity_credits">CreditsActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
     <string name="authors">Autori:</string>
     <string name="names">Karmela Slišković\nJosip Tomić\nJasmin Vučelj\n</string>
     <string name="course">Predmet:</string>
@@ -18,4 +20,58 @@
     <string name="categories">Kategorije</string>
     <string name="settings">Postavke</string>
     <string name="about">O aplikaciji</string>
+    <string name="language">Jezik:</string>
+    <string name="currency">Valuta:</string>
+    <string name="auto_add_salary">Automatsko dodavanje plaće</string>
+    <string name="paycheck_date">Dan isplate plaće:</string>
+    <string name="period">Razdoblje:</string>
+    <string name="sharedPrefsFileName">SharedPrefs</string>
+    <string-array name="currency_array">
+        <item>HRK</item>
+        <item>EUR</item>
+        <item>USD</item>
+    </string-array>
+    <string-array name="language_array">
+        <item>Hrvatski</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="date_day_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+    </string-array>
+    <string-array name="period_array">
+        <item>Dan</item>
+        <item>Tjedan</item>
+        <item>Mjesec</item>
+        <item>Godina</item>
+    </string-array>
+
 </resources>
