@@ -27,8 +27,13 @@
             android:label="@string/title_activity_main_menu" />
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings">
-        </activity>
+            android:label="@string/title_activity_settings" />
+        <activity
+            android:name=".CostsActivity"
+            android:label="@string/title_activity_costs" />
+        <activity
+            android:name=".AddCostActivity"
+            android:label="@string/title_activity_add_cost"></activity>
     </application>
 
 </manifest>

@@ -73,5 +73,8 @@
         <item>Mjesec</item>
         <item>Godina</item>
     </string-array>
+    <string name="title_activity_costs">CostsActivity</string>
+    <string name="costs_label">Mjesečni troškovi</string>
+    <string name="title_activity_add_cost">AddCostActivity</string>
 
 </resources>

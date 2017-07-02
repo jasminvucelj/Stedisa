@@ -26,7 +26,7 @@ public class MainMenuActivity extends Activity {
         ibCosts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startNewActivity(v.getContext(), CostsActivity.class);
+                startNewActivity(v.getContext(), CostsActivity.class);
             }
         });
 

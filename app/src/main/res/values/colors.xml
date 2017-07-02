@@ -2,5 +2,15 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#448aff</color>
+    <color name="graph_1">#11603B</color>
+    <color name="graph_2">#675EF3</color>
+    <color name="graph_3">#CF59C2</color>
+    <color name="graph_4">#A34036</color>
+    <color name="graph_5">#675C13</color>
+    <color name="graph_6">#6A2098</color>
+    <color name="graph_7">#685274</color>
+    <color name="graph_8">#DB6703</color>
+    <color name="graph_9">#08A405</color>
+    <color name="graph_10">#8CC9BA</color>
 </resources>
