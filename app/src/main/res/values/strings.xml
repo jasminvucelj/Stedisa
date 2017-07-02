@@ -78,7 +78,9 @@
     <string name="title_activity_add_cost">AddCostActivity</string>
     <string name="title_activity_cost_details">CostDetailsActivity</string>
     <string name="new_cost">Novi trošak</string>
+    <string name="new_income">Novi prihod</string>
     <string name="cost_details">Detalji troška</string>
+    <string name="income_details">Detalji prihoda</string>
     <string name="title">Naziv:</string>
     <string name="quantity">Količina:</string>
     <string name="category">Kategorija:</string>
@@ -88,4 +90,8 @@
     <string name="edit">Uredi</string>
     <string name="delete">Obriši</string>
     <string name="incomes_label">Mjesečni prihodi</string>
+    <string name="title_activity_add_income">AddIncomeActivity</string>
+    <string name="title_activity_income_details">IncomeDetailsActivity</string>
+    <string name="title_activity_categories">CategoriesActivity</string>
+    <string name="title_activity_statistics_details">StatisticsDetails</string>
 </resources>

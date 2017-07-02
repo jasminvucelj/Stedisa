@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.stedisa.CostDetailsActivity">
+    tools:context="com.stedisa.IncomeDetailsActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cost_details"
+            android:text="@string/income_details"
             android:textAlignment="center"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -47,7 +47,7 @@
                 android:layout_marginRight="20dp"
                 android:textAlignment="textEnd"
                 android:textSize="18sp"
-                android:text="Majica"/>
+                android:text="Baka"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,7 +72,7 @@
                 android:layout_marginRight="20dp"
                 android:textAlignment="textEnd"
                 android:textSize="18sp"
-                android:text="89.00 kn"/>
+                android:text="500.00 kn"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                 android:textSize="18sp"/>
             <ImageView
                 android:id="@+id/costDetailsCategoryImage"
-                android:src="@drawable/shirt"
+                android:src="@drawable/gift"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
@@ -99,7 +99,7 @@
                 android:textAlignment="textStart"/>
             <TextView
                 android:id="@+id/costDetailsCategory"
-                android:text="Odjeća"
+                android:text="Poklon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
@@ -129,7 +129,7 @@
                 android:layout_marginTop="10dp"
                 android:textAlignment="textStart"
                 android:textSize="18sp"
-                android:text="Ona koju sam kupio u C&amp;A, plave boje"/>
+                android:text="Novci što mi je baka dala za 22. rođendan"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

@@ -37,7 +37,19 @@
         <activity
             android:name=".CostDetailsActivity"
             android:label="@string/title_activity_cost_details" />
-        <activity android:name=".IncomesActivity"></activity>
+        <activity android:name=".IncomesActivity" />
+        <activity
+            android:name=".AddIncomeActivity"
+            android:label="@string/title_activity_add_income" />
+        <activity
+            android:name=".IncomeDetailsActivity"
+            android:label="@string/title_activity_income_details" />
+        <activity
+            android:name=".CategoriesActivity"
+            android:label="@string/title_activity_categories" />
+        <activity
+            android:name=".StatisticsDetails"
+            android:label="@string/title_activity_statistics_details"></activity>
     </application>
 
 </manifest>

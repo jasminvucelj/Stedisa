@@ -68,14 +68,14 @@ public class IncomesActivity extends Activity {
         incomesChart.invalidate();
 
 
-//        FloatingActionButton addIncomeButton = (FloatingActionButton) findViewById(R.id.addIncomeButton);
-//        addIncomeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(v.getContext(), AddIncomeActivity.class);
-//                v.getContext().startActivity(intent);
-//            }
-//        });
+        FloatingActionButton addIncomeButton = (FloatingActionButton) findViewById(R.id.addIncomeButton);
+        addIncomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AddIncomeActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
 
         TextView totalIncomes = (TextView) findViewById(R.id.totalIncomes);
         totalIncomes.setText(String.format("Ukupno %.2f", db.getIncomesSum()));
@@ -85,13 +85,13 @@ public class IncomesActivity extends Activity {
         PriceRowAdapter costListAdapter = new PriceRowAdapter(this, db.getAllIncomes());
         incomesList.setAdapter(costListAdapter);
         costListAdapter.notifyDataSetChanged();
-//        incomesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(view.getContext(), IncomeDetailsActivity.class);
-//                view.getContext().startActivity(intent);
-//            }
-//        });
+        incomesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(view.getContext(), IncomeDetailsActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     private int[] colors() {
