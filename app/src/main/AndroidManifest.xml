@@ -33,7 +33,10 @@
             android:label="@string/title_activity_costs" />
         <activity
             android:name=".AddCostActivity"
-            android:label="@string/title_activity_add_cost"></activity>
+            android:label="@string/title_activity_add_cost" />
+        <activity
+            android:name=".CostDetailsActivity"
+            android:label="@string/title_activity_cost_details" />
     </application>
 
 </manifest>

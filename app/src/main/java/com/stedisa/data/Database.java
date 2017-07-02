@@ -26,21 +26,21 @@ public class Database {
     }
 
     public void createMockupData() {
-        Category c1 = new Category(1, "Food", "");
-        Category c2 = new Category(2, "Drinks", "");
-        Category c3 = new Category(3, "Clothes", "");
-        Category c4 = new Category(4, "Shoes", "");
+        Category c1 = new Category(1, "Hrana", "burger");
+        Category c2 = new Category(2, "Piće", "bottle");
+        Category c3 = new Category(3, "Odjeća", "shirt");
+        Category c4 = new Category(4, "Obuća", "shoe");
         categories.add(c1);
         categories.add(c2);
         categories.add(c3);
         categories.add(c4);
 
-        Transaction t1 = new Transaction(1, 12f, "Chips", "", c1, getDate(2017, 7, 2, 18, 0));
-        Transaction t2 = new Transaction(2, 6f, "Cookie", "", c1, getDate(2017, 7, 2, 18, 0));
-        Transaction t3 = new Transaction(3, 6f, "Coke", "", c2, getDate(2017, 7, 2, 18, 0));
-        Transaction t4 = new Transaction(4, 6f, "Beer", "", c2, getDate(2017, 7, 2, 18, 0));
-        Transaction t5 = new Transaction(5, 89f, "T-Shirt", "", c3, getDate(2017, 7, 2, 18, 0));
-        Transaction t6 = new Transaction(6, 250f, "Sneakers", "", c4, getDate(2017, 7, 2, 18, 0));
+        Transaction t1 = new Transaction(1, 12f, "Čišps", "", c1, getDate(2017, 7, 2, 18, 0));
+        Transaction t2 = new Transaction(2, 6f, "Keksi", "", c1, getDate(2017, 7, 2, 18, 0));
+        Transaction t3 = new Transaction(3, 6f, "Coca-cola", "", c2, getDate(2017, 7, 2, 18, 0));
+        Transaction t4 = new Transaction(4, 6f, "Pivo", "", c2, getDate(2017, 7, 2, 18, 0));
+        Transaction t5 = new Transaction(5, 89f, "Majica", "", c3, getDate(2017, 7, 2, 18, 0));
+        Transaction t6 = new Transaction(6, 250f, "Patike", "", c4, getDate(2017, 7, 2, 18, 0));
 
         List<Transaction> c1l = new ArrayList<>();
         c1l.add(t1);

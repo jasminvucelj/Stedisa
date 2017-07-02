@@ -76,5 +76,15 @@
     <string name="title_activity_costs">CostsActivity</string>
     <string name="costs_label">Mjesečni troškovi</string>
     <string name="title_activity_add_cost">AddCostActivity</string>
-
+    <string name="title_activity_cost_details">CostDetailsActivity</string>
+    <string name="new_cost">Novi trošak</string>
+    <string name="cost_details">Detalji troška</string>
+    <string name="title">Naziv:</string>
+    <string name="quantity">Količina:</string>
+    <string name="category">Kategorija:</string>
+    <string name="cancel">Odustani</string>
+    <string name="add">Dodaj</string>
+    <string name="description">Napomena:</string>
+    <string name="edit">Uredi</string>
+    <string name="delete">Obriši</string>
 </resources>

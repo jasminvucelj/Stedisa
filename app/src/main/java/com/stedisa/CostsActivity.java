@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Pair;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -74,6 +75,13 @@ public class CostsActivity extends Activity {
         costListAdapter = new PriceRowAdapter(this, db.getAllCosts());
         costList.setAdapter(costListAdapter);
         costListAdapter.notifyDataSetChanged();
+        costList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(view.getContext(), CostDetailsActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     private int[] colors() {

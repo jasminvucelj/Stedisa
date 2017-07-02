@@ -7,15 +7,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.stedisa.data.Transaction;
+import com.stedisa.data.Category;
 
 import java.util.List;
 
-public class PriceRowAdapter extends ArrayAdapter<Transaction> {
-    public PriceRowAdapter(Context c, List<Transaction> data) {
-        super(c, R.layout.transaction_row, data);
+public class CategoryRowAdapter extends ArrayAdapter<Category> {
+    public CategoryRowAdapter(Context c, List<Category> data) {
+        super(c, R.layout.category_row, data);
     }
 
     @NonNull
@@ -24,7 +25,7 @@ public class PriceRowAdapter extends ArrayAdapter<Transaction> {
         ViewHolder holder = null;
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.transaction_row, null, false);
+            convertView = inflater.inflate(R.layout.category_row, null, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }
@@ -32,14 +33,15 @@ public class PriceRowAdapter extends ArrayAdapter<Transaction> {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.getName().setText(getItem(position).getName());
-        holder.getPrice().setText(String.format("%.2f", getItem(position).getValue()));
+        holder.getImage().setImageResource(getContext().getResources().getIdentifier(getItem(position).getIcon(), "drawable", getContext().getPackageName()));
 
         return convertView;
     }
 
     public class ViewHolder {
         private View row;
-        private TextView name = null, price = null;
+        private ImageView image = null;
+        private TextView name = null;
 
         public ViewHolder(View row) {
             this.row = row;
@@ -47,16 +49,16 @@ public class PriceRowAdapter extends ArrayAdapter<Transaction> {
 
         public TextView getName() {
             if (this.name == null) {
-                this.name = (TextView) row.findViewById(R.id.listItemName);
+                this.name = (TextView) row.findViewById(R.id.categoryName);
             }
             return this.name;
         }
 
-        public TextView getPrice() {
-            if (this.price == null) {
-                this.price = (TextView) row.findViewById(R.id.listItemPrice);
+        public ImageView getImage() {
+            if (this.image == null) {
+                this.image = (ImageView) row.findViewById(R.id.categoryImage);
             }
-            return this.price;
+            return this.image;
         }
     }
 }
