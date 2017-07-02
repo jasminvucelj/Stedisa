@@ -33,7 +33,7 @@ public class MainMenuActivity extends Activity {
         ibIncomes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startNewActivity(v.getContext(), IncomesActivity.class);
+                startNewActivity(v.getContext(), IncomesActivity.class);
             }
         });
 

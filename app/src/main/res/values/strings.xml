@@ -87,4 +87,5 @@
     <string name="description">Napomena:</string>
     <string name="edit">Uredi</string>
     <string name="delete">Obriši</string>
+    <string name="incomes_label">Mjesečni prihodi</string>
 </resources>

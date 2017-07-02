@@ -37,6 +37,7 @@
         <activity
             android:name=".CostDetailsActivity"
             android:label="@string/title_activity_cost_details" />
+        <activity android:name=".IncomesActivity"></activity>
     </application>
 
 </manifest>

@@ -16,13 +16,13 @@ import java.util.Map;
 public class Database {
     private HashMap<Category, List<Transaction>> costs;
     private HashMap<Category, List<Transaction>> incomes;
-    private List<Category> categories;
+    private HashMap<Long, Category> categories;
     private static Database db = new Database();
 
     private Database() {
         this.costs = new HashMap<>();
         this.incomes = new HashMap<>();
-        this.categories = new ArrayList<>();
+        this.categories = new HashMap<>();
     }
 
     public void createMockupData() {
@@ -30,10 +30,18 @@ public class Database {
         Category c2 = new Category(2, "Piće", "bottle");
         Category c3 = new Category(3, "Odjeća", "shirt");
         Category c4 = new Category(4, "Obuća", "shoe");
-        categories.add(c1);
-        categories.add(c2);
-        categories.add(c3);
-        categories.add(c4);
+
+        Category c5 = new Category(5, "Plaća", "money");
+        Category c6 = new Category(6, "Stipendija", "wallet");
+        Category c7 = new Category(7, "Poklon", "gift");
+
+        categories.put(c1.getId(), c1);
+        categories.put(c2.getId(), c2);
+        categories.put(c3.getId(), c3);
+        categories.put(c4.getId(), c4);
+        categories.put(c5.getId(), c5);
+        categories.put(c6.getId(), c6);
+        categories.put(c7.getId(), c7);
 
         Transaction t1 = new Transaction(1, 12f, "Čišps", "", c1, getDate(2017, 7, 2, 18, 0));
         Transaction t2 = new Transaction(2, 6f, "Keksi", "", c1, getDate(2017, 7, 2, 18, 0));
@@ -41,6 +49,11 @@ public class Database {
         Transaction t4 = new Transaction(4, 6f, "Pivo", "", c2, getDate(2017, 7, 2, 18, 0));
         Transaction t5 = new Transaction(5, 89f, "Majica", "", c3, getDate(2017, 7, 2, 18, 0));
         Transaction t6 = new Transaction(6, 250f, "Patike", "", c4, getDate(2017, 7, 2, 18, 0));
+
+        Transaction t7 = new Transaction(7, 5000f, "Plaća Svibanj", "", c5, getDate(2017, 7, 2, 18, 0));
+        Transaction t8 = new Transaction(8, 500f, "Baka", "", c7, getDate(2017, 7, 2, 18, 0));
+        Transaction t9 = new Transaction(9, 200f, "Mama", "", c7, getDate(2017, 7, 2, 18, 0));
+        Transaction t10 = new Transaction(10, 1100f, "Stipendija", "", c6, getDate(2017, 7, 2, 18, 0));
 
         List<Transaction> c1l = new ArrayList<>();
         c1l.add(t1);
@@ -59,6 +72,19 @@ public class Database {
         List<Transaction> c4l = new ArrayList<>();
         c4l.add(t6);
         costs.put(c4, c4l);
+
+        List<Transaction> c5l = new ArrayList<>();
+        c5l.add(t7);
+        incomes.put(c5, c5l);
+
+        List<Transaction> c6l = new ArrayList<>();
+        c6l.add(t10);
+        incomes.put(c6, c6l);
+
+        List<Transaction> c7l = new ArrayList<>();
+        c7l.add(t8);
+        c7l.add(t9);
+        incomes.put(c7, c7l);
     }
 
     public static Database getInstance() {
@@ -66,21 +92,41 @@ public class Database {
     }
 
     public List<Category> getCategories() {
-        return categories;
+        return new ArrayList<>(categories.values());
+    }
+
+    public Category getCategory(Long id) {
+        return categories.get(id);
     }
 
     public List<Transaction> getAllCosts() {
+        return getAll(costs);
+    }
+
+    public List<Transaction> getAllIncomes() {
+        return getAll(incomes);
+    }
+
+    public List<Transaction> getAll(HashMap<Category, List<Transaction>> transactions) {
         List<Transaction> all = new ArrayList<>();
-        for (List<Transaction> t : costs.values()) {
+        for (List<Transaction> t : transactions.values()) {
             all.addAll(t);
         }
         return all;
     }
 
     public List<Pair<Category, Float>> getCostsSumsByCategories() {
+        return getSumsByCategories(this.costs);
+    }
+
+    public List<Pair<Category, Float>> getIncomesSumsByCategories() {
+        return getSumsByCategories(this.incomes);
+    }
+
+    public List<Pair<Category, Float>> getSumsByCategories(HashMap<Category, List<Transaction>> transactions) {
         List<Pair<Category, Float>> result = new ArrayList<>();
         Calendar now = Calendar.getInstance();
-        for (Map.Entry e : costs.entrySet()) {
+        for (Map.Entry e : transactions.entrySet()) {
             float sum = 0f;
             for (Transaction t : (List<Transaction>)e.getValue()) {
                 if (dateToCalendar(t.getDate()).get(Calendar.MONTH) == now.get(Calendar.MONTH)) {
@@ -94,7 +140,19 @@ public class Database {
 
     public double getCostsSum() {
         double sum = 0.0;
+        //TODO dodaj vrijeme
         for (List<Transaction> lt : costs.values()) {
+            for (Transaction t: lt) {
+                sum += t.getValue();
+            }
+        }
+        return sum;
+    }
+
+    public double getIncomesSum() {
+        double sum = 0.0;
+        //TODO dodaj vrijeme
+        for (List<Transaction> lt : incomes.values()) {
             for (Transaction t: lt) {
                 sum += t.getValue();
             }

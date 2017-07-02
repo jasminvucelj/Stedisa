@@ -23,27 +23,17 @@ import java.util.List;
 
 public class CostsActivity extends Activity {
 
-    private PieChart costsChart;
-    private List<PieEntry> chartEntries;
-
-    private FloatingActionButton addCostButton;
-    private TextView totalCosts;
-    private ListView costList;
-    private PriceRowAdapter costListAdapter;
-
-    private Database db;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_costs);
 
-        db = Database.getInstance();
+        Database db = Database.getInstance();
         db.createMockupData();
 
-        costsChart = (PieChart) findViewById(R.id.costsChart);
-        chartEntries = new ArrayList<>();
+        PieChart costsChart = (PieChart) findViewById(R.id.costsChart);
+        List<PieEntry> chartEntries = new ArrayList<>();
         int i = 0;
         for (Pair<Category, Float> pair : db.getCostsSumsByCategories()) {
             chartEntries.add(new PieEntry(pair.second, pair.first.getName()));
@@ -58,7 +48,7 @@ public class CostsActivity extends Activity {
         costsChart.invalidate();
 
 
-        addCostButton = (FloatingActionButton) findViewById(R.id.addCostButton);
+        FloatingActionButton addCostButton = (FloatingActionButton) findViewById(R.id.addCostButton);
         addCostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,12 +57,12 @@ public class CostsActivity extends Activity {
             }
         });
 
-        totalCosts = (TextView) findViewById(R.id.totalCosts);
+        TextView totalCosts = (TextView) findViewById(R.id.totalCosts);
         totalCosts.setText(String.format("Ukupno %.2f", db.getCostsSum()));
 
 
-        costList = (ListView) findViewById(R.id.costList);
-        costListAdapter = new PriceRowAdapter(this, db.getAllCosts());
+        ListView costList = (ListView) findViewById(R.id.costList);
+        PriceRowAdapter costListAdapter = new PriceRowAdapter(this, db.getAllCosts());
         costList.setAdapter(costListAdapter);
         costListAdapter.notifyDataSetChanged();
         costList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
