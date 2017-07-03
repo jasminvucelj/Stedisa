@@ -1,8 +1,10 @@
 package com.stedisa.data;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
-public class Transaction {
+public class Transaction implements Serializable {
     private long id;
     private float value;
     private String name;
@@ -25,6 +27,10 @@ public class Transaction {
 
     public float getValue() {
         return value;
+    }
+
+    public String getValueString() {
+        return String.format("%.2f", value);
     }
 
     public String getName() {
@@ -69,6 +75,19 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return name + String.format("%.2f", value);
+        return name + " " + getValueString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

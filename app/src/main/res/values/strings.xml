@@ -86,6 +86,7 @@
     <string name="category">Kategorija:</string>
     <string name="cancel">Odustani</string>
     <string name="add">Dodaj</string>
+    <string name="save">Spremi</string>
     <string name="description">Napomena:</string>
     <string name="edit">Uredi</string>
     <string name="delete">Obriši</string>
@@ -94,4 +95,6 @@
     <string name="title_activity_income_details">IncomeDetailsActivity</string>
     <string name="title_activity_categories">CategoriesActivity</string>
     <string name="title_activity_statistics_details">StatisticsDetails</string>
+    <string name="title_activity_edit_cost">EditCostActivity</string>
+    <string name="edit_cost">Uredi trošak</string>
 </resources>

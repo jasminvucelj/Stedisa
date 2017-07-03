@@ -36,7 +36,6 @@ public class IncomesActivity extends Activity {
         setContentView(R.layout.activity_incomes);
 
         final Database db = Database.getInstance();
-        db.createMockupData();
 
         BarChart incomesChart = (BarChart) findViewById(R.id.incomesChart);
         List<BarEntry> chartEntries = new ArrayList<>();

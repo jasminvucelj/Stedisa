@@ -49,7 +49,10 @@
             android:label="@string/title_activity_categories" />
         <activity
             android:name=".StatisticsDetails"
-            android:label="@string/title_activity_statistics_details"></activity>
+            android:label="@string/title_activity_statistics_details" />
+        <activity
+            android:name=".EditCostActivity"
+            android:label="@string/title_activity_edit_cost"></activity>
     </application>
 
 </manifest>

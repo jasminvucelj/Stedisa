@@ -32,8 +32,9 @@ public class CategoryRowAdapter extends ArrayAdapter<Category> {
         else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.getName().setText(getItem(position).getName());
-        holder.getImage().setImageResource(getContext().getResources().getIdentifier(getItem(position).getIcon(), "drawable", getContext().getPackageName()));
+        Category c = getItem(position);
+        holder.getName().setText(c.getName());
+        holder.getImage().setImageResource(Util.getImageIdByName(getContext(), c.getIcon()));
 
         return convertView;
     }

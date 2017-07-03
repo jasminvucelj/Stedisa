@@ -17,22 +17,67 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.stedisa.data.Category;
 import com.stedisa.data.Database;
+import com.stedisa.data.DatabaseChangeListener;
+import com.stedisa.data.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CostsActivity extends Activity {
+public class CostsActivity extends Activity implements DatabaseChangeListener {
 
+    private PieChart costsChart;
+    private TextView totalCosts;
+    private ListView costList;
+
+    private Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_costs);
 
-        Database db = Database.getInstance();
-        db.createMockupData();
 
-        PieChart costsChart = (PieChart) findViewById(R.id.costsChart);
+        db = Database.getInstance();
+        db.addListener(this);
+
+        costsChart = (PieChart) findViewById(R.id.costsChart);
+        costsChart.getDescription().setEnabled(false);
+        costsChart.setDrawEntryLabels(false);
+        refreshChart();
+
+        totalCosts = (TextView) findViewById(R.id.totalCosts);
+        refreshSum();
+
+        costList = (ListView) findViewById(R.id.costList);
+        costList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(view.getContext(), CostDetailsActivity.class);
+                Transaction t = (Transaction) costList.getAdapter().getItem(position);
+                intent.putExtra(CostDetailsActivity.EXTRA_COST, t);
+                view.getContext().startActivity(intent);
+            }
+        });
+        refreshList();
+
+        FloatingActionButton addCostButton = (FloatingActionButton) findViewById(R.id.addCostButton);
+        addCostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AddCostActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onChange() {
+        refreshChart();
+        refreshSum();
+        refreshList();
+    }
+
+    private void refreshChart() {
         List<PieEntry> chartEntries = new ArrayList<>();
         int i = 0;
         for (Pair<Category, Float> pair : db.getCostsSumsByCategories()) {
@@ -43,35 +88,17 @@ public class CostsActivity extends Activity {
         PieData data = new PieData(set);
         data.setValueTextColor(Color.WHITE);
         costsChart.setData(data);
-        costsChart.getDescription().setEnabled(false);
-        costsChart.setDrawEntryLabels(false);
         costsChart.invalidate();
+    }
 
-
-        FloatingActionButton addCostButton = (FloatingActionButton) findViewById(R.id.addCostButton);
-        addCostButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AddCostActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
-
-        TextView totalCosts = (TextView) findViewById(R.id.totalCosts);
+    private void refreshSum() {
         totalCosts.setText(String.format("Ukupno %.2f", db.getCostsSum()));
+    }
 
-
-        ListView costList = (ListView) findViewById(R.id.costList);
+    private void refreshList() {
         PriceRowAdapter costListAdapter = new PriceRowAdapter(this, db.getAllCosts());
         costList.setAdapter(costListAdapter);
         costListAdapter.notifyDataSetChanged();
-        costList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), CostDetailsActivity.class);
-                view.getContext().startActivity(intent);
-            }
-        });
     }
 
     private int[] colors() {

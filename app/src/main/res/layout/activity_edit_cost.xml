@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.stedisa.AddCostActivity">
+    tools:context="com.stedisa.EditCostActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/new_cost"
+            android:text="@string/edit_cost"
             android:textAlignment="center"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -34,7 +34,7 @@
             android:layout_marginTop="15dp"
             android:textSize="18sp"/>
         <EditText
-            android:id="@+id/newCostTitle"
+            android:id="@+id/editCostTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -57,7 +57,7 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/newCostQuantity"
+                android:id="@+id/editCostQuantity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
@@ -84,7 +84,7 @@
             android:layout_marginTop="15dp"
             android:textSize="18sp"/>
         <EditText
-            android:id="@+id/newCostDescription"
+            android:id="@+id/editCostDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -102,7 +102,7 @@
             android:layout_marginTop="30dp"
             android:textSize="18sp"/>
         <ListView
-            android:id="@+id/newCostCategory"
+            android:id="@+id/editCostCategory"
             android:choiceMode="singleChoice"
             android:listSelector="@color/colorAccent"
             android:layout_width="match_parent"
@@ -119,17 +119,17 @@
             android:gravity="right"
             android:layout_margin="20dp">
             <Button
-                android:id="@+id/newCostButtonCancel"
+                android:id="@+id/editCostButtonCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:text="@string/cancel"/>
             <Button
-                android:id="@+id/newCostButtonAdd"
+                android:id="@+id/editCostButtonSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="@string/add"/>
+                android:text="@string/save"/>
         </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
