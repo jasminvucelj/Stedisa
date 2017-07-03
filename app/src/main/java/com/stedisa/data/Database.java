@@ -1,13 +1,21 @@
 package com.stedisa.data;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Pair;
 
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.temporal.ChronoField;
+import org.threeten.bp.temporal.ChronoUnit;
+import org.threeten.bp.temporal.TemporalField;
+
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +25,10 @@ public class Database {
     private HashMap<Category, List<Transaction>> costs;
     private HashMap<Category, List<Transaction>> incomes;
     private List<Category> categories;
+
+    private TemporalField temporalField;
+    private Currency currency;
+
     private static Database db = new Database();
 
     private List<DatabaseChangeListener> listeners;
@@ -30,18 +42,19 @@ public class Database {
         this.categories = new ArrayList<>();
 
         this.listeners = new ArrayList<DatabaseChangeListener>();
+        this.temporalField = ChronoField.MONTH_OF_YEAR;
         createMockupData();
     }
 
     public void createMockupData() {
-        Category c1 = new Category(1, "Hrana", CategoryType.COST, "burger");
-        Category c2 = new Category(2, "Piće", CategoryType.COST, "bottle");
-        Category c3 = new Category(3, "Odjeća", CategoryType.COST, "shirt");
-        Category c4 = new Category(4, "Obuća", CategoryType.COST, "shoe");
+        Category c1 = new Category(categoryId++, "Hrana", CategoryType.COST, "burger");
+        Category c2 = new Category(categoryId++, "Piće", CategoryType.COST, "bottle");
+        Category c3 = new Category(categoryId++, "Odjeća", CategoryType.COST, "shirt");
+        Category c4 = new Category(categoryId++, "Obuća", CategoryType.COST, "shoe");
 
-        Category c5 = new Category(5, "Plaća", CategoryType.INCOME, "money");
-        Category c6 = new Category(6, "Stipendija", CategoryType.INCOME, "wallet");
-        Category c7 = new Category(7, "Poklon", CategoryType.INCOME, "gift");
+        Category c5 = new Category(categoryId++, "Plaća", CategoryType.INCOME, "money");
+        Category c6 = new Category(categoryId++, "Stipendija", CategoryType.INCOME, "wallet");
+        Category c7 = new Category(categoryId++, "Poklon", CategoryType.INCOME, "gift");
 
         categories.add(c1);
         categories.add(c2);
@@ -51,17 +64,21 @@ public class Database {
         categories.add(c6);
         categories.add(c7);
 
-        Transaction t1 = new Transaction(1, 12f, "Čišps", "", c1, getDate(2017, 7, 2, 18, 0));
-        Transaction t2 = new Transaction(2, 6f, "Keksi", "", c1, getDate(2017, 7, 2, 18, 0));
-        Transaction t3 = new Transaction(3, 6f, "Coca-cola", "", c2, getDate(2017, 7, 2, 18, 0));
-        Transaction t4 = new Transaction(4, 6f, "Pivo", "", c2, getDate(2017, 7, 2, 18, 0));
-        Transaction t5 = new Transaction(5, 89f, "Majica", "", c3, getDate(2017, 7, 2, 18, 0));
-        Transaction t6 = new Transaction(6, 250f, "Patike", "", c4, getDate(2017, 7, 2, 18, 0));
+        LocalDate now = LocalDate.now();
+        LocalDate fourthMonth = LocalDate.of(2017, 4, 5);
+        LocalDate fifthMonth = LocalDate.of(2017, 5, 5);
+        LocalDate sixthMonth = LocalDate.of(2017, 6, 5);
+        Transaction t1 = new Transaction(transactionId++, 12f, "Čišps", "", c1, now);
+        Transaction t2 = new Transaction(transactionId++, 6f, "Keksi", "", c1, fourthMonth);
+        Transaction t3 = new Transaction(transactionId++, 6f, "Coca-cola", "", c2, fifthMonth);
+        Transaction t4 = new Transaction(transactionId++, 6f, "Pivo", "", c2, sixthMonth);
+        Transaction t5 = new Transaction(transactionId++, 89f, "Majica", "", c3, now);
+        Transaction t6 = new Transaction(transactionId++, 250f, "Patike", "", c4, fifthMonth);
 
-        Transaction t7 = new Transaction(7, 5000f, "Plaća Svibanj", "", c5, getDate(2017, 7, 2, 18, 0));
-        Transaction t8 = new Transaction(8, 500f, "Baka", "", c7, getDate(2017, 7, 2, 18, 0));
-        Transaction t9 = new Transaction(9, 200f, "Mama", "", c7, getDate(2017, 7, 2, 18, 0));
-        Transaction t10 = new Transaction(10, 1100f, "Stipendija", "", c6, getDate(2017, 7, 2, 18, 0));
+        Transaction t7 = new Transaction(transactionId++, 2000f, "Plaća Svibanj", "", c5, fifthMonth);
+        Transaction t8 = new Transaction(transactionId++, 500f, "Baka", "", c7, sixthMonth);
+        Transaction t9 = new Transaction(transactionId++, 200f, "Mama", "", c7, fourthMonth);
+        Transaction t10 = new Transaction(transactionId++, 1100f, "Stipendija", "", c6, now);
 
         List<Transaction> c1l = new ArrayList<>();
         c1l.add(t1);
@@ -111,6 +128,22 @@ public class Database {
         return db;
     }
 
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String code) {
+        this.currency = Currency.getInstance(code);
+    }
+
+    public TemporalField getTemporalField() {
+        return temporalField;
+    }
+
+    public void setTemporalField(TemporalField temporalField) {
+        this.temporalField = temporalField;
+    }
+
     public List<Category> getCategories() {
         return categories;
     }
@@ -125,8 +158,12 @@ public class Database {
 
     public List<Transaction> getAll(HashMap<Category, List<Transaction>> transactions) {
         List<Transaction> all = new ArrayList<>();
-        for (List<Transaction> t : transactions.values()) {
-            all.addAll(t);
+        for (List<Transaction> lt : transactions.values()) {
+            for (Transaction t : lt) {
+                if (checkPeriod(t.getDate())) {
+                    all.add(t);
+                }
+            }
         }
         return all;
     }
@@ -151,7 +188,7 @@ public class Database {
 
     private void add(HashMap<Category, List<Transaction>> transactions, float value, String name, String description, Category category) {
         List<Transaction> transactionList = transactions.get(category);
-        Transaction newTransaction = new Transaction(transactionId++, value, name, description, category, new Date());
+        Transaction newTransaction = new Transaction(transactionId++, value, name, description, category, LocalDate.now());
         if (transactionList == null) {
             transactionList = new ArrayList<>();
             transactionList.add(newTransaction);
@@ -168,6 +205,11 @@ public class Database {
 
     public void addCost(float value, String name, String description, Category category) {
         add(costs, value, name, description, category);
+    }
+
+    public void addCategory(String name, CategoryType type, String icon) {
+        categories.add(new Category(categoryId++, name, type, icon));
+        fire();
     }
 
     public void deleteIncome(Transaction t) {
@@ -265,7 +307,7 @@ public class Database {
         for (Map.Entry e : transactions.entrySet()) {
             float sum = 0f;
             for (Transaction t : (List<Transaction>)e.getValue()) {
-                if (dateToCalendar(t.getDate()).get(Calendar.MONTH) == now.get(Calendar.MONTH)) {
+                if (checkPeriod(t.getDate())) {
                     sum += t.getValue();
                 }
             }
@@ -274,37 +316,157 @@ public class Database {
         return result;
     }
 
-    public double getCostsSum() {
-        double sum = 0.0;
-        //TODO dodaj vrijeme
-        for (List<Transaction> lt : costs.values()) {
+    public float getCostsSum(boolean checkPeriod) {
+        return getSum(costs, checkPeriod);
+    }
+
+    public float getIncomesSum(boolean checkPeriod) {
+        return getSum(incomes, checkPeriod);
+    }
+
+    private float getSum(HashMap<Category, List<Transaction>> transactions, boolean checkPeriod) {
+        float sum = 0f;
+        for (List<Transaction> lt : transactions.values()) {
             for (Transaction t: lt) {
-                sum += t.getValue();
+                if (checkPeriod) {
+                    if (checkPeriod(t.getDate())) {
+                        sum += t.getValue();
+                    }
+                } else {
+                    sum += t.getValue();
+                }
             }
         }
         return sum;
     }
 
-    public double getIncomesSum() {
-        double sum = 0.0;
-        //TODO dodaj vrijeme
-        for (List<Transaction> lt : incomes.values()) {
-            for (Transaction t: lt) {
+    public int getIncomeCount() {
+        return getCount(incomes);
+    }
+
+    public int getCostCount() {
+        return getCount(costs);
+    }
+
+    private int getCount(HashMap<Category, List<Transaction>> transactions) {
+        int count = 0;
+        for (List<Transaction> lt : transactions.values()) {
+            count += lt.size();
+        }
+        return count;
+    }
+
+    public float getIncomeAverage() {
+        return getAverage(incomes);
+    }
+
+    public float getCostAverage() {
+        return getAverage(costs);
+    }
+
+    private float getAverage(HashMap<Category, List<Transaction>> transactions) {
+        float sum = 0f;
+        LocalDate minDate = LocalDate.now();
+        for (List<Transaction> lt : transactions.values()) {
+            for (Transaction t : lt) {
                 sum += t.getValue();
+                if (t.getDate().isBefore(minDate)) {
+                    minDate = t.getDate();
+                }
             }
         }
-        return sum;
+        long periodCount = Math.max(temporalField.getBaseUnit().between(minDate, LocalDate.now()), 1);
+        return sum / periodCount;
     }
 
-    private static Calendar dateToCalendar(Date d) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(d);
-        return c;
+    public Pair<List<String>, Pair<List<Float>, List<Float>>> getValuesByPeriods() {
+        LocalDate minDate = LocalDate.now();
+        for (List<Transaction> lt : this.incomes.values()) {
+            for (Transaction t : lt) {
+                if (t.getDate().isBefore(minDate)) {
+                    minDate = t.getDate();
+                }
+            }
+        }
+        for (List<Transaction> lt : this.costs.values()) {
+            for (Transaction t : lt) {
+                if (t.getDate().isBefore(minDate)) {
+                    minDate = t.getDate();
+                }
+            }
+        }
+
+        List<Float> incomes = new ArrayList<>();
+        List<Float> costs = new ArrayList<>();
+        List<String> labels = new ArrayList<>();
+
+        do {
+            float sumIncome = 0f;
+            float sumCost = 0f;
+            for (List<Transaction> lt : this.incomes.values()) {
+                for (Transaction t : lt) {
+                    if (checkPeriod(minDate, t.getDate())) {
+                        sumIncome += t.getValue();
+                    }
+                }
+            }
+            for (List<Transaction> lt : this.costs.values()) {
+                for (Transaction t : lt) {
+                    if (checkPeriod(minDate, t.getDate())) {
+                        sumCost += t.getValue();
+                    }
+                }
+            }
+            String s = getPeriodString(minDate);
+            incomes.add(sumIncome);
+            costs.add(sumCost);
+            labels.add(s);
+            if (checkPeriod(minDate)) {
+                break;
+            }
+            minDate = minDate.plus(1, temporalField.getBaseUnit());
+        } while(true);
+
+        return new Pair<>(labels, new Pair<>(incomes, costs));
     }
 
-    private static Date getDate(int year, int month, int day, int hour, int seconds) {
-        Calendar c = Calendar.getInstance();
-        c.set(year, month - 1, day, hour, seconds);
-        return c.getTime();
+    private String getPeriodString(LocalDate date) {
+        if (temporalField == ChronoField.YEAR) {
+            return Integer.toString(date.getYear());
+        }
+        if (temporalField == ChronoField.MONTH_OF_YEAR) {
+            return Integer.toString(date.getMonth().getValue()) + "/" + Integer.toString(date.getYear());
+        }
+        if (temporalField == ChronoField.ALIGNED_WEEK_OF_YEAR) {
+            return Integer.toString(date.get(ChronoField.ALIGNED_WEEK_OF_YEAR)) + "/" + Integer.toString(date.getYear());
+        }
+        if (temporalField == ChronoField.DAY_OF_MONTH) {
+            return Integer.toString(date.getDayOfMonth()) + "/" + Integer.toString(date.getMonth().getValue()) + "/" + Integer.toString(date.getYear());
+        }
+        return "";
+    }
+
+    private boolean checkPeriod(LocalDate first, LocalDate second) {
+        boolean sameYear = first.get(ChronoField.YEAR) == second.get(ChronoField.YEAR);
+        if (temporalField == ChronoField.YEAR) {
+            return sameYear;
+        }
+        boolean sameMonth = first.get(ChronoField.MONTH_OF_YEAR) == second.get(ChronoField.MONTH_OF_YEAR);
+        if (temporalField == ChronoField.MONTH_OF_YEAR) {
+            return sameYear && sameMonth;
+        }
+        boolean sameWeek = first.get(ChronoField.ALIGNED_WEEK_OF_YEAR) == second.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
+        if (temporalField == ChronoField.ALIGNED_WEEK_OF_YEAR) {
+            return sameYear && sameWeek;
+        }
+        boolean sameDay = first.get(ChronoField.DAY_OF_MONTH) == second.get(ChronoField.DAY_OF_MONTH);
+        if (temporalField == ChronoField.DAY_OF_MONTH) {
+            return sameYear && sameMonth && sameDay;
+        }
+        return false;
+    }
+
+    private boolean checkPeriod(LocalDate date) {
+        return checkPeriod(LocalDate.now(), date);
     }
 }

@@ -1,4 +1,4 @@
-package com.stedisa;
+package com.stedisa.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.stedisa.R;
+import com.stedisa.Util;
 import com.stedisa.data.Category;
 
 import java.util.List;

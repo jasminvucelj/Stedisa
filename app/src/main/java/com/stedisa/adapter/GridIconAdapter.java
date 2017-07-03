@@ -1,4 +1,4 @@
-package com.stedisa;
+package com.stedisa.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,15 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.stedisa.data.Transaction;
+import com.stedisa.R;
+import com.stedisa.Util;
 
 import java.util.List;
 
-public class PriceRowAdapter extends ArrayAdapter<Transaction> {
-    public PriceRowAdapter(Context c, List<Transaction> data) {
-        super(c, R.layout.transaction_row, data);
+public class GridIconAdapter extends ArrayAdapter<String> {
+    public GridIconAdapter(Context c, List<String> data) {
+        super(c, R.layout.grid_image, data);
     }
 
     @NonNull
@@ -24,39 +26,32 @@ public class PriceRowAdapter extends ArrayAdapter<Transaction> {
         ViewHolder holder = null;
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.transaction_row, null, false);
+            convertView = inflater.inflate(R.layout.grid_image, null, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         }
         else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.getName().setText(getItem(position).getName());
-        holder.getPrice().setText(String.format("%.2f", getItem(position).getValue()));
+        String name = getItem(position);
+        holder.getImage().setImageResource(Util.getImageIdByName(getContext(), name));
 
         return convertView;
     }
 
     public class ViewHolder {
         private View row;
-        private TextView name = null, price = null;
+        private ImageView image = null;
 
         public ViewHolder(View row) {
             this.row = row;
         }
 
-        public TextView getName() {
-            if (this.name == null) {
-                this.name = (TextView) row.findViewById(R.id.listItemName);
+        public ImageView getImage() {
+            if (this.image == null) {
+                this.image = (ImageView) row.findViewById(R.id.categoryImage);
             }
-            return this.name;
-        }
-
-        public TextView getPrice() {
-            if (this.price == null) {
-                this.price = (TextView) row.findViewById(R.id.listItemPrice);
-            }
-            return this.price;
+            return this.image;
         }
     }
 }

@@ -2,7 +2,6 @@ package com.stedisa;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Pair;
@@ -12,16 +11,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.stedisa.adapter.PriceRowAdapter;
 import com.stedisa.data.Category;
 import com.stedisa.data.Database;
 import com.stedisa.data.DatabaseChangeListener;
@@ -50,6 +47,13 @@ public class IncomesActivity extends Activity implements DatabaseChangeListener 
         incomesChart.getDescription().setEnabled(false);
         incomesChart.getLegend().setEnabled(false);
         incomesChart.setFitBars(true);
+        incomesChart.getAxisRight().setEnabled(false);
+        YAxis left = incomesChart.getAxisLeft();
+        left.setDrawLabels(false); // no axis labels
+        left.setDrawAxisLine(false); // no axis line
+        left.setDrawGridLines(false); // no grid lines
+        left.setDrawZeroLine(true); // draw a zero line
+        incomesChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         refreshChart();
 
         totalIncomes = (TextView) findViewById(R.id.totalIncomes);
@@ -109,7 +113,7 @@ public class IncomesActivity extends Activity implements DatabaseChangeListener 
     }
 
     private void refreshSum() {
-        totalIncomes.setText(String.format("Ukupno %.2f", db.getIncomesSum()));
+        totalIncomes.setText(String.format("Ukupno %.2f", db.getIncomesSum(true)));
     }
 
     private void refreshList() {

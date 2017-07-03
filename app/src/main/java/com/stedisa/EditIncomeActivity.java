@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.stedisa.adapter.CategoryRowAdapter;
 import com.stedisa.data.Category;
 import com.stedisa.data.Database;
 import com.stedisa.data.Transaction;

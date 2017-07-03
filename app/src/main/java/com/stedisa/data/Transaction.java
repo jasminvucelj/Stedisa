@@ -1,5 +1,7 @@
 package com.stedisa.data;
 
+import org.threeten.bp.LocalDate;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -10,9 +12,9 @@ public class Transaction implements Serializable {
     private String name;
     private String description;
     private Category category;
-    private Date date;
+    private LocalDate date;
 
-    public Transaction(long id, float value, String name, String description, Category category, Date date) {
+    public Transaction(long id, float value, String name, String description, Category category, LocalDate date) {
         this.id = id;
         this.value = value;
         this.name = name;
@@ -45,7 +47,7 @@ public class Transaction implements Serializable {
         return category;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -69,7 +71,7 @@ public class Transaction implements Serializable {
         this.category = category;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

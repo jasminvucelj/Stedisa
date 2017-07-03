@@ -11,6 +11,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 
+import com.stedisa.data.Database;
+
+import org.threeten.bp.temporal.ChronoField;
+import org.threeten.bp.temporal.TemporalField;
+
 import java.util.Arrays;
 
 public class SettingsActivity extends Activity {
@@ -83,7 +88,7 @@ public class SettingsActivity extends Activity {
         spinnerDate.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                paycheckDate = (Integer) parent.getItemAtPosition(position);
+                paycheckDate = Integer.parseInt((String) parent.getItemAtPosition(position));
             }
 
             @Override
@@ -124,5 +129,18 @@ public class SettingsActivity extends Activity {
         editor.putBoolean("autoAddSalary", autoAddSalary);
         editor.apply();
 
+        Database db = Database.getInstance();
+        db.setCurrency(currency);
+        TemporalField temporalField = ChronoField.MONTH_OF_YEAR;
+        if (period.equals("Mjesec")) {
+            temporalField = ChronoField.MONTH_OF_YEAR;
+        } else if (period.equals("Tjedan")) {
+            temporalField = ChronoField.ALIGNED_WEEK_OF_YEAR;
+        } else if (period.equals("Dan")) {
+            temporalField = ChronoField.DAY_OF_MONTH;
+        } else if (period.equals("Godina")) {
+            temporalField = ChronoField.YEAR;
+        }
+        db.setTemporalField(temporalField);
     }
 }

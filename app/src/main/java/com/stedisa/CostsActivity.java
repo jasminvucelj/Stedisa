@@ -15,6 +15,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.stedisa.adapter.PriceRowAdapter;
 import com.stedisa.data.Category;
 import com.stedisa.data.Database;
 import com.stedisa.data.DatabaseChangeListener;
@@ -91,7 +92,7 @@ public class CostsActivity extends Activity implements DatabaseChangeListener {
     }
 
     private void refreshSum() {
-        totalCosts.setText(String.format("Ukupno %.2f", db.getCostsSum()));
+        totalCosts.setText(String.format("Ukupno %.2f", db.getCostsSum(true)));
     }
 
     private void refreshList() {

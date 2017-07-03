@@ -25,14 +25,17 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:background="#FF888888" />
+
         <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="15dp"
-            android:textSize="18sp"/>
+            android:text="@string/title"
+            android:textSize="18sp" />
+
         <EditText
             android:id="@+id/newCostTitle"
             android:layout_width="match_parent"

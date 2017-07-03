@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.stedisa.StatisticsDetails">
+    tools:context="com.stedisa.StatisticsDetailsActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,19 +38,19 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="Ukupno"
+            android:text="@string/total"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
         <TextView
+            android:id="@+id/statDetailsIncomeSum"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:text="19666.00 kn"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textAlignment="textEnd"/>
     </LinearLayout>
     <LinearLayout
@@ -63,19 +63,19 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="Broj uplata"
+            android:text="@string/count"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
         <TextView
+            android:id="@+id/statDetailsIncomeCount"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="47"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textAlignment="textEnd"/>
     </LinearLayout>
     <LinearLayout
@@ -91,17 +91,17 @@
             android:layout_width="0dp"
             android:layout_weight="3.5"
             android:layout_height="wrap_content"
-            android:text="Prosjek po razdoblju"
+            android:text="@string/average"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
         <TextView
+            android:id="@+id/statDetailsIncomeAvg"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="5436.00 kn"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textAlignment="textEnd"/>
     </LinearLayout>
 
@@ -129,19 +129,19 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="Ukupno"
+            android:text="@string/total"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
         <TextView
+            android:id="@+id/statDetailsCostSum"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
-            android:text="5333.00 kn"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textAlignment="textEnd"/>
     </LinearLayout>
     <LinearLayout
@@ -154,19 +154,19 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="Broj uplata"
+            android:text="@string/count"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
         <TextView
+            android:id="@+id/statDetailsCostCount"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="129"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textAlignment="textEnd"/>
     </LinearLayout>
     <LinearLayout
@@ -182,17 +182,17 @@
             android:layout_width="0dp"
             android:layout_weight="3.5"
             android:layout_height="wrap_content"
-            android:text="Prosjek po razdoblju"
+            android:text="@string/average"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             />
         <TextView
+            android:id="@+id/statDetailsCostAvg"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="1853.00 kn"
             android:layout_marginLeft="20dp"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textAlignment="textEnd"/>
     </LinearLayout>
 </LinearLayout>

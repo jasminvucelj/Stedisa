@@ -40,28 +40,28 @@ public class MainMenuActivity extends Activity {
         ibStats.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startNewActivity(v.getContext(), StatsActivity.class);
+                startNewActivity(v.getContext(), StatisticsActivity.class);
             }
         });
 
         ibCurrencies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startNewActivity(v.getContext(), CurrenciesActivity.class);
+                startNewActivity(v.getContext(), CurrenciesActivity.class);
             }
         });
 
         ibCategories.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startNewActivity(v.getContext(), CategoriesActivity.class);
+                startNewActivity(v.getContext(), CategoriesActivity.class);
             }
         });
 
         ibSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startNewActivity(v.getContext(), SettingsActivity.class);
+                startNewActivity(v.getContext(), SettingsActivity.class);
             }
         });
 

@@ -99,4 +99,23 @@
     <string name="title_activity_edit_income">EditIncomeActivity</string>
     <string name="edit_cost">Uredi trošak</string>
     <string name="edit_income">Uredi prihod</string>
+    <string name="total">Ukupno</string>
+    <string name="count">Količina</string>
+    <string name="average">Prosjek po razdoblju</string>
+    <string name="title_activity_statistics">StatisticsActivity</string>
+    <string name="details">Detalji</string>
+    <string name="title_activity_add_category">AddCategoryActivity</string>
+    <string name="new_category">Nova kategorija</string>
+    <string name="type">Tip:</string>
+    <string name="icon">Ikona:</string>
+    <string-array name="category_type">
+        <item>Prihod</item>
+        <item>Trošak</item>
+    </string-array>
+    <string name="title_activity_curencies">CurenciesActivity</string>
+    <string name="choose_currency_label">Odaberite valutu za pregled tečaja</string>
+    <string name="unit">Jedinica:</string>
+    <string name="buyed">Kupovni:</string>
+    <string name="selled">Prodajni:</string>
+    <string name="middle">Srednji:</string>
 </resources>
