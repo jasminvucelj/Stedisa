@@ -239,6 +239,15 @@ public class Database {
                 return t;
             }
         }
+        //not found in that category, search every then
+        for (List<Transaction> lt : transactions.values()) {
+            for (Transaction t : lt) {
+                if (t.equals(transaction)) {
+                    return t;
+                }
+            }
+        }
+        //this should not happen;
         return transaction;
     }
 

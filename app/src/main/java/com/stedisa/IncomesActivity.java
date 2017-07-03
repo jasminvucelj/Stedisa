@@ -24,20 +24,67 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.stedisa.data.Category;
 import com.stedisa.data.Database;
+import com.stedisa.data.DatabaseChangeListener;
+import com.stedisa.data.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class IncomesActivity extends Activity {
+public class IncomesActivity extends Activity implements DatabaseChangeListener {
+
+    private BarChart incomesChart;
+    private TextView totalIncomes;
+    private ListView incomesList;
+
+    private Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incomes);
 
-        final Database db = Database.getInstance();
+        db = Database.getInstance();
+        db.addListener(this);
 
-        BarChart incomesChart = (BarChart) findViewById(R.id.incomesChart);
+        incomesChart = (BarChart) findViewById(R.id.incomesChart);
+        incomesChart.getDescription().setEnabled(false);
+        incomesChart.getLegend().setEnabled(false);
+        incomesChart.setFitBars(true);
+        refreshChart();
+
+        totalIncomes = (TextView) findViewById(R.id.totalIncomes);
+        refreshSum();
+
+        incomesList = (ListView) findViewById(R.id.incomesList);
+        incomesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(view.getContext(), IncomeDetailsActivity.class);
+                Transaction t = (Transaction) incomesList.getAdapter().getItem(position);
+                intent.putExtra(IncomeDetailsActivity.EXTRA_INCOME, t);
+                view.getContext().startActivity(intent);
+            }
+        });
+        refreshList();
+
+        FloatingActionButton addIncomeButton = (FloatingActionButton) findViewById(R.id.addIncomeButton);
+        addIncomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AddIncomeActivity.class);
+                v.getContext().startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onChange() {
+        refreshChart();
+        refreshSum();
+        refreshList();
+    }
+
+    private void refreshChart() {
         List<BarEntry> chartEntries = new ArrayList<>();
         int i = 0;
         final List<Category> codes = new ArrayList<>();
@@ -49,10 +96,7 @@ public class IncomesActivity extends Activity {
         BarDataSet set = new BarDataSet(chartEntries, "");
         set.setColors(colors(), this);
         BarData data = new BarData(set);
-        //data.setValueTextColor(Color.WHITE);
         incomesChart.setData(data);
-        incomesChart.getDescription().setEnabled(false);
-
         XAxis xAxis = incomesChart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
@@ -61,36 +105,17 @@ public class IncomesActivity extends Activity {
                 return codes.get((int) value).getName();
             }
         });
-        //incomesChart.setDrawEntryLabels(false)
-        incomesChart.getLegend().setEnabled(false);
-        incomesChart.setFitBars(true);
         incomesChart.invalidate();
+    }
 
-
-        FloatingActionButton addIncomeButton = (FloatingActionButton) findViewById(R.id.addIncomeButton);
-        addIncomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AddIncomeActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
-
-        TextView totalIncomes = (TextView) findViewById(R.id.totalIncomes);
+    private void refreshSum() {
         totalIncomes.setText(String.format("Ukupno %.2f", db.getIncomesSum()));
+    }
 
-
-        ListView incomesList = (ListView) findViewById(R.id.incomesList);
+    private void refreshList() {
         PriceRowAdapter costListAdapter = new PriceRowAdapter(this, db.getAllIncomes());
         incomesList.setAdapter(costListAdapter);
         costListAdapter.notifyDataSetChanged();
-        incomesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(view.getContext(), IncomeDetailsActivity.class);
-                view.getContext().startActivity(intent);
-            }
-        });
     }
 
     private int[] colors() {

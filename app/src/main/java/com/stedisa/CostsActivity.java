@@ -36,7 +36,6 @@ public class CostsActivity extends Activity implements DatabaseChangeListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_costs);
 
-
         db = Database.getInstance();
         db.addListener(this);
 

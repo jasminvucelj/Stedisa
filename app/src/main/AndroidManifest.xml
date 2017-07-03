@@ -52,7 +52,10 @@
             android:label="@string/title_activity_statistics_details" />
         <activity
             android:name=".EditCostActivity"
-            android:label="@string/title_activity_edit_cost"></activity>
+            android:label="@string/title_activity_edit_cost" />
+        <activity
+            android:name=".EditIncomeActivity"
+            android:label="@string/title_activity_edit_income"></activity>
     </application>
 
 </manifest>

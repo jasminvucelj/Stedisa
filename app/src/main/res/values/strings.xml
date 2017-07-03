@@ -96,5 +96,7 @@
     <string name="title_activity_categories">CategoriesActivity</string>
     <string name="title_activity_statistics_details">StatisticsDetails</string>
     <string name="title_activity_edit_cost">EditCostActivity</string>
+    <string name="title_activity_edit_income">EditIncomeActivity</string>
     <string name="edit_cost">Uredi trošak</string>
+    <string name="edit_income">Uredi prihod</string>
 </resources>

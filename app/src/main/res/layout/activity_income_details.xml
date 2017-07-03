@@ -39,15 +39,14 @@
                 android:layout_marginRight="20dp"
                 android:textSize="18sp"/>
             <TextView
-                android:id="@+id/costDetailsTitle"
+                android:id="@+id/incomeDetailsTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textAlignment="textEnd"
-                android:textSize="18sp"
-                android:text="Baka"/>
+                android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,15 +63,14 @@
                 android:layout_marginRight="20dp"
                 android:textSize="18sp"/>
             <TextView
-                android:id="@+id/costDetailsPrice"
+                android:id="@+id/incomeDetailsPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:textAlignment="textEnd"
-                android:textSize="18sp"
-                android:text="500.00 kn"/>
+                android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,16 +88,14 @@
                 android:layout_marginRight="20dp"
                 android:textSize="18sp"/>
             <ImageView
-                android:id="@+id/costDetailsCategoryImage"
-                android:src="@drawable/gift"
+                android:id="@+id/incomeDetailsCategoryImage"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
                 android:textSize="16sp"
                 android:textAlignment="textStart"/>
             <TextView
-                android:id="@+id/costDetailsCategory"
-                android:text="Poklon"
+                android:id="@+id/incomeDetailsCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
@@ -121,15 +117,14 @@
                 android:layout_marginRight="20dp"
                 android:textSize="18sp"/>
             <TextView
-                android:id="@+id/costDetailsDescription"
+                android:id="@+id/incomeDetailsDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
                 android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:text="Novci što mi je baka dala za 22. rođendan"/>
+                android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -138,13 +133,13 @@
             android:gravity="right"
             android:layout_margin="20dp">
             <Button
-                android:id="@+id/newCostButtonCancel"
+                android:id="@+id/incomeDetailsEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:text="@string/edit"/>
             <Button
-                android:id="@+id/newCostButtonAdd"
+                android:id="@+id/incomeDetailsDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
